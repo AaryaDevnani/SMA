@@ -83,6 +83,43 @@ plt.ylabel('Number of Entries')
 plt.title('Social Media Trends')
 plt.show()
 
+
+# OR ====================================================
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# Read in the CSV file
+df = pd.read_csv('trend_analysis.csv')
+
+
+# Convert the 'date' column to a datetime data type
+df['date'] = pd.to_datetime(df['date'])
+
+
+print(df.head())
+
+
+# Set the 'date' column as the index of the DataFrame
+df.set_index('date', inplace=True)
+
+
+# Resample the data by day and count the number of entries in each day
+# argument 'D' indicating that we want to resample by day.
+daily_counts = df.resample('D').count()
+print("Daily Counts: \n", daily_counts)
+
+
+
+
+# Plot the daily counts over time
+plt.plot(np.array(daily_counts.index), np.array(daily_counts['id']))
+plt.xlabel('Day')
+plt.ylabel('Number of Entries')
+plt.title('Social Media Trends')
+plt.show()
+
+
 ```
 
 ## Exp 4: Hashtag Analysis
